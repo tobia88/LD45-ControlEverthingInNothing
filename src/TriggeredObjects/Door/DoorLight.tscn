@@ -18,9 +18,11 @@ light_mode = 2
 light_mode = 2
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 30, 80 )
 
 [node name="DoorLight" type="Area2D" groups=[
 "triggable",
+"door",
 ]]
 script = ExtResource( 1 )
 input_key = "button_a"
@@ -48,19 +50,21 @@ texture = ExtResource( 3 )
 energy = 1.2
 shadow_enabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Door" type="Area2D" parent="."]
 
-[node name="Body" type="Position2D" parent="Area2D"]
+[node name="Body" type="Position2D" parent="Door"]
 
-[node name="ImgDoorShadow" type="Sprite" parent="Area2D/Body"]
+[node name="ImgDoorShadow" type="Sprite" parent="Door/Body"]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 0, -80 )
 texture = ExtResource( 4 )
 
-[node name="ImgDoorNormal" type="Sprite" parent="Area2D/Body"]
+[node name="ImgDoorNormal" type="Sprite" parent="Door/Body"]
 material = SubResource( 3 )
 position = Vector2( 0, -80 )
 texture = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( 0, -80 )
 shape = SubResource( 4 )
+[connection signal="body_entered" from="Door" to="." method="_on_Door_body_entered"]
