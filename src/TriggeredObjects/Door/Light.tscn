@@ -6,7 +6,7 @@
 [ext_resource path="res://src/TriggeredObjects/Lights/img-radial-light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 581.667
+radius = 490.408
 
 [sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 2
@@ -35,7 +35,7 @@ material = SubResource( 3 )
 texture = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="LightBody"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 4 )
 energy = 1.2
 shadow_enabled = true

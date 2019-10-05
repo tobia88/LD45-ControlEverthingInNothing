@@ -7,7 +7,7 @@
 [ext_resource path="res://src/TriggeredObjects/Door/door.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 581.667
+radius = 480.416
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -27,11 +27,11 @@ INPUT_PHASE = ExtResource( 2 )
 PICK_PRIORITY = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -254 )
+position = Vector2( 0, -190 )
 shape = SubResource( 2 )
 
 [node name="LightBody" type="Position2D" parent="."]
-position = Vector2( 0, -254 )
+position = Vector2( 0, -190 )
 
 [node name="ImgDoorShadow" type="Sprite" parent="LightBody"]
 modulate = Color( 0.192157, 0.192157, 0.192157, 1 )
@@ -43,9 +43,11 @@ material = SubResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="LightBody"]
-scale = Vector2( 3, 3 )
+position = Vector2( 0, 4.00001 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 4 )
-energy = 1.5
+offset = Vector2( 0, -1.33334 )
+energy = 1.2
 shadow_enabled = true
 
 [node name="Door" type="Area2D" parent="."]
