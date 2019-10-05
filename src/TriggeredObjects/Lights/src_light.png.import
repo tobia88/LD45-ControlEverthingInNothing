@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile_ground.png-08989e92d43cf08451e09c9c218210f5.stex"
+path="res://.import/src_light.png-2b8855e39eb3d49a805bdbfa149e3cc9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/Environments/Background/tile_ground.png"
-dest_files=[ "res://.import/tile_ground.png-08989e92d43cf08451e09c9c218210f5.stex" ]
+source_file="res://src/TriggeredObjects/Lights/src_light.png"
+dest_files=[ "res://.import/src_light.png-2b8855e39eb3d49a805bdbfa149e3cc9.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
