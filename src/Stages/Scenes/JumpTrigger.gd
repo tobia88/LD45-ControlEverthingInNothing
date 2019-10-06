@@ -1,46 +1,78 @@
 tool
 
-extends Area2D
+extends "res://src/TriggeredObjects/SomeoneTriggableObject.gd"
 
-var is_triggering: bool = false setget set_is_triggered
-export(int) var JUMP_DEGREE = 90
-export(int) var JUMP_FORCE = 300
+export(int) var JUMP_DEGREE: int = 90
+export(int) var JUMP_FORCE: int = 300
+export(bool) var CHECK_DEG: bool = false
 
 var vel = Vector2.ZERO
+var wait_for_light_off = false
 
 func _process(delta: float) -> void:
-	var result = false
-
-	var areas = self.get_overlapping_areas()
-
-	for area_node in areas:
-		if area_node.is_in_group("light"):
-			result = true
-			break
-
-	set_is_triggered(result)
-	
+	._process(delta)
+	$DebugLabel.text = "Detection=%s"%detection
 	update()
 
-func set_is_triggered(value) -> void:
-	if value == is_triggering:
-		return
+func detect_condition(someone) -> bool:
+	if not .detect_condition(someone):
+		return false
+	"""
+	var direct_space = get_world_2d().direct_space_state
+	var result = direct_space.intersect_ray(global_position, someone.global_position, [self])
+	if result:
+		print_debug(name + ", " + result["collider"].name)
+		return false
+	"""
+	
+	var facing = (global_position - someone.global_position).normalized()
+	
+	if CHECK_DEG:
+		var vd = Vector2.LEFT if someone.is_facing_left else Vector2.RIGHT
+		
+		var dot = facing.dot(vd)
+		var deg = rad2deg(acos(dot))
+		
+		if abs(deg) > 50:
+			return false
+	
+	detection = true
+	
+	var dir = deg_to_dir()
+	
+	detection = sign(facing.x) == sign(dir.x)
+	return detection
+	
+func do_right_thing(someone) -> void:
+	.do_right_thing(someone)
+	someone.jump(deg_to_dir() * JUMP_FORCE)
 
-	is_triggering = value
+func check_conditions(player) -> bool:
+	if not .check_conditions(player):
+		return false
+		
+	if not player.is_grounding or not is_triggering:
+		return false
+	
+	var player_vel = player.velocity.normalized()
+	
+	if player_vel == Vector2.ZERO:
+		player_vel = Vector2.LEFT if player.is_facing_left else Vector2.RIGHT
+		
+	var dir = deg_to_dir()
+	
+	var dot = dir.dot(player_vel)
+	
+	var deg = rad2deg(acos(dot))
 
-func _on_JumpTrigger_body_entered(body: PhysicsBody2D) -> void:
-	if body == null:
-		return
-
-	if body.is_in_group("someone"):
-		body.jump(deg_to_dir() * JUMP_FORCE)
+	return deg < 85
 
 func deg_to_dir() -> Vector2:
 	var rad = deg2rad(JUMP_DEGREE)
 	return Vector2(cos(rad), sin(rad))
 
 func _draw() -> void:
-	var nb_points = 80
+	var nb_points = 40
 	var points_arc = PoolVector2Array()
 	
 	var velocity = deg_to_dir() * JUMP_FORCE

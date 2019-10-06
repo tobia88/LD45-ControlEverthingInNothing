@@ -1,15 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Stages/BaseStage.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Stages/Scenes/Stage002.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/TriggeredObjects/Door/DoorLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Environments/Background/BgHole_B.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/TriggeredObjects/Door/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/TriggeredObjects/DialogueTrigger/DialogueTrigger.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/TriggeredObjects/Conditions/DirectionTest.tscn" type="PackedScene" id=7]
 
 [node name="Stage" instance=ExtResource( 1 )]
 NEXT_STAGE = ExtResource( 2 )
 
+[node name="Environment" parent="." index="1"]
+editor/display_folded = true
+
 [node name="DoorLight" parent="Environment" index="0" instance=ExtResource( 3 )]
-position = Vector2( 1580, 1000 )
-INPUT_KEY = "button_a"
+position = Vector2( 1580, 800 )
+input_key = "button_a"
+
+[node name="BgHole_B" parent="Environment/DoorLight" index="2" instance=ExtResource( 4 )]
+position = Vector2( -310, 208.5 )
+
+[node name="Door" parent="Environment" index="1" instance=ExtResource( 5 )]
+position = Vector2( 1580, 1010 )
 
 [node name="Someone" parent="." index="2"]
 position = Vector2( 280, 1000 )
+
+[node name="DialogueTrigger" parent="." index="4" instance=ExtResource( 6 )]
+position = Vector2( 810, 910 )
+CONDITION = [ NodePath("DirectionTest") ]
+
+[node name="DirectionTest" parent="DialogueTrigger" index="1" instance=ExtResource( 7 )]
+degree = 0

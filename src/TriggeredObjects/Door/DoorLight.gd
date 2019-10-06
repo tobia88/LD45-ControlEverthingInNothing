@@ -45,16 +45,5 @@ func set_is_triggering(value: bool) -> void:
 	
 	if is_triggering:
 		GameData.key_pressed += 1
-		Events.emit_signal("on_start_trigger", self)
 	else:
 		GameData.key_pressed -= 1
-		Events.emit_signal("on_stop_trigger", self)
-
-func _on_Door_body_entered(body: PhysicsBody2D) -> void:
-	if body == null or not is_triggering:
-		return
-	
-	print_debug("Triggering the room: %s"%body.name)
-		
-	if body.is_in_group("someone"):
-		Events.emit_signal("someone_entered_door", body)

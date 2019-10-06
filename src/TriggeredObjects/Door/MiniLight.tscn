@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/TriggeredObjects/Door/Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/TriggeredObjects/Lights/mini_light_deactivated.png" type="Texture" id=2]
+[ext_resource path="res://src/TriggeredObjects/Lights/mini_light_activated.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.0
+
+[node name="MiniLight" instance=ExtResource( 1 )]
+PREVENT_POWER_DECAY = true
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="ImgDoorShadow" parent="LightBody" index="0"]
+texture = ExtResource( 2 )
+
+[node name="ImgDoorNormal" parent="LightBody" index="1"]
+texture = ExtResource( 3 )
+
+[node name="Light2D" parent="LightBody" index="2"]
+scale = Vector2( 0.522864, 0.522864 )

@@ -1,0 +1,31 @@
+{
+  "skeleton": {
+    "images": "D:/Softwares/GameProjects/Godot/LD45-ControlEverythinInNothing/src_imgs"
+  },
+  "bones": [
+    {
+      "name": "root"
+    }
+  ],
+  "slots": [
+    {
+      "name": "bg_stage_1",
+      "bone": "root",
+      "attachment": "bg_stage_1"
+    }
+  ],
+  "skins": {
+    "default": {
+      "bg_stage_1": {
+        "bg_stage_1": {
+          "x": 960.0,
+          "y": -538.5,
+          "rotation": 0,
+          "width": 1920,
+          "height": 1079
+        }
+      }
+    }
+  },
+  "animations": {}
+}

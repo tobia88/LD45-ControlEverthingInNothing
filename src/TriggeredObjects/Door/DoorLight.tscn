@@ -1,70 +1,27 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/TriggeredObjects/Door/DoorLight.gd" type="Script" id=1]
-[ext_resource path="res://src/TriggeredObjects/Door/PowerDecayCurve.tres" type="Curve" id=2]
-[ext_resource path="res://src/TriggeredObjects/Lights/src_door_light.png" type="Texture" id=3]
-[ext_resource path="res://src/TriggeredObjects/Lights/img-radial-light.png" type="Texture" id=4]
-[ext_resource path="res://src/TriggeredObjects/Door/door.png" type="Texture" id=5]
+[ext_resource path="res://src/TriggeredObjects/Door/Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/TriggeredObjects/Lights/door_light_deactivated.png" type="Texture" id=2]
+[ext_resource path="res://src/TriggeredObjects/Lights/door_light_activated.png" type="Texture" id=3]
+[ext_resource path="res://src/TriggeredObjects/Lights/door_light.png" type="Texture" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 480.416
+[sub_resource type="CircleShape2D" id=1]
+radius = 160.312
 
-[sub_resource type="CanvasItemMaterial" id=1]
-light_mode = 2
+[node name="DoorLight" instance=ExtResource( 1 )]
+IS_RADIAL_LIGHT = false
 
-[sub_resource type="CanvasItemMaterial" id=3]
-light_mode = 2
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30, 80 )
+[node name="ImgDoorShadow" parent="LightBody" index="0"]
+texture = ExtResource( 2 )
 
-[node name="DoorLight" type="Area2D" groups=[
-"triggable",
-"door",
-]]
-script = ExtResource( 1 )
-INPUT_PHASE = ExtResource( 2 )
-PICK_PRIORITY = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -190 )
-shape = SubResource( 2 )
-
-[node name="LightBody" type="Position2D" parent="."]
-position = Vector2( 0, -190 )
-
-[node name="ImgDoorShadow" type="Sprite" parent="LightBody"]
-modulate = Color( 0.192157, 0.192157, 0.192157, 1 )
-self_modulate = Color( 0, 0, 0, 1 )
+[node name="ImgDoorNormal" parent="LightBody" index="1"]
 texture = ExtResource( 3 )
 
-[node name="ImgDoorNormal" type="Sprite" parent="LightBody"]
-material = SubResource( 1 )
-texture = ExtResource( 3 )
-
-[node name="Light2D" type="Light2D" parent="LightBody"]
-position = Vector2( 0, 4.00001 )
-scale = Vector2( 2.5, 2.5 )
+[node name="Light2D" parent="LightBody" index="2"]
+position = Vector2( 0, -40.0002 )
+scale = Vector2( 1.11111, 1.06952 )
 texture = ExtResource( 4 )
-offset = Vector2( 0, -1.33334 )
-energy = 1.2
-shadow_enabled = true
-
-[node name="Door" type="Area2D" parent="."]
-
-[node name="Body" type="Position2D" parent="Door"]
-
-[node name="ImgDoorShadow" type="Sprite" parent="Door/Body"]
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 0, -80 )
-texture = ExtResource( 5 )
-
-[node name="ImgDoorNormal" type="Sprite" parent="Door/Body"]
-material = SubResource( 3 )
-position = Vector2( 0, -80 )
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2( 0, -80 )
-shape = SubResource( 4 )
-[connection signal="body_entered" from="Door" to="." method="_on_Door_body_entered"]
+offset = Vector2( 0, 187 )

@@ -3,6 +3,8 @@ extends Area2D
 export(String) var input_key
 export(Curve) var input_phase
 export(int) var PICK_PRIORITY
+export(bool) var PREVENT_POWER_DECAY = false
+export(bool) var IS_RADIAL_LIGHT: bool = true
 
 var max_scale: float = 0
 var is_triggering: bool = false setget set_is_triggering
@@ -25,13 +27,17 @@ func _process(delta: float) -> void:
 	update_power()
 
 func update_power() -> void:
-	var percentage = input_phase.interpolate(GameData.get_power_ratio())
+	var ratio = 1.0 if PREVENT_POWER_DECAY else GameData.get_power_ratio()
+	var percentage = input_phase.interpolate(ratio)
 	var tmp_scale: float = lerp(0.0, max_scale, percentage)
 	
 	light.enabled = is_triggering
 	
 	if is_triggering:
-		light.scale = Vector2(tmp_scale, tmp_scale)
+		if IS_RADIAL_LIGHT:
+			light.scale = Vector2(tmp_scale, tmp_scale)
+		else:
+			light.scale = Vector2(light.scale.x, tmp_scale)
 	
 func set_is_triggering(value: bool) -> void:
 	if is_triggering == value:

@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 GameData="*res://src/Autoload/GameData.gd"
 Events="*res://src/Autoload/Events.gd"
+Utils="*res://src/Autoload/Utils.gd"
 
 [display]
 
@@ -52,7 +53,7 @@ button_c={
 }
 button_d={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":89,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug_activation={

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/TriggeredObjects/Switcher/Switcher.gd" type="Script" id=1]
+[ext_resource path="res://src/TriggeredObjects/Switcher/someone_controller_deactive.png" type="Texture" id=2]
+[ext_resource path="res://src/TriggeredObjects/Switcher/someone_controller_active.png" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Switcher" type="Area2D" groups=[
+"someone_triggable",
+]]
+script = ExtResource( 1 )
+PREVENT_RESET_ACTIVATION = true
+
+[node name="Body" type="Position2D" parent="."]
+editor/display_folded = true
+
+[node name="BodyShadowImg" type="Sprite" parent="Body"]
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="BodyImg" type="Sprite" parent="Body"]
+material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )

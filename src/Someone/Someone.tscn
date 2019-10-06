@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Someone/Someone.gd" type="Script" id=1]
 [ext_resource path="res://src/Someone/someone_idle.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/Dialogues/Dialogue.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 2
@@ -38,3 +39,6 @@ margin_bottom = -127.849
 text = "Velocity:10.37"
 align = 1
 valign = 1
+
+[node name="Dialogue" parent="." instance=ExtResource( 3 )]
+position = Vector2( -50, -167.849 )

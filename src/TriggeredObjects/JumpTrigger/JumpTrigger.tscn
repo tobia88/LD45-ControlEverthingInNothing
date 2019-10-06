@@ -5,11 +5,23 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
 
-[node name="JumpTrigger" type="Area2D"]
+[node name="JumpTrigger" type="Area2D" groups=[
+"someone_triggable",
+]]
 script = ExtResource( 1 )
-JUMP_DEGREE = -75
+PREVENT_RESET_ACTIVATION = null
 JUMP_FORCE = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="DebugLabel" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -10.0
+margin_right = 20.0
+margin_bottom = 4.0
+text = "Detection=False"
+align = 1
+valign = 1
+autowrap = true
 [connection signal="body_entered" from="." to="." method="_on_JumpTrigger_body_entered"]
